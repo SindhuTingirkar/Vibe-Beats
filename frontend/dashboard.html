@@ -1,0 +1,42 @@
+2<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VibeBeats — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">🎧 VibeBeats</div>
+  <button class="btn small" onclick="logout()">Logout</button>
+</nav>
+
+<main class="container">
+
+  <!-- MOOD INPUT -->
+  <section class="prompt-area">
+    <h2>How are you feeling right now?</h2>
+
+    <textarea id="moodInput" placeholder="Type how you feel (e.g. I feel sad, happy, angry)"></textarea>
+
+    <div class="row">
+      <button type="button" onclick="analyzeMood()" class="btn primary">Analyze Mood</button>
+      <span id="status" class="muted"></span>
+    </div>
+
+    <h3 id="detectedMood" class="muted"></h3>
+  </section>
+
+  <!-- RESULT -->
+  <section id="songListArea" class="playlist">
+    <h2>Suggested songs</h2>
+    <div id="result"></div>
+  </section>
+
+</main>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

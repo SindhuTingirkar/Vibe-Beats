@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VibeBeats Admin</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2 class="logo">VibeBeats</h2>
+
+    <button onclick="showPage('dashboard')">Dashboard</button>
+    <button onclick="showPage('users')">Users</button>
+    <button onclick="showPage('trending')">Trending</button>
+    <button onclick="showPage('earnings')">Earnings</button>
+    <!-- ✅ NEW PLAYLIST BUTTON -->
+<button onclick="showPage('adminPlaylists')">Playlists</button>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <input type="text" placeholder="Search users, songs...">
+      <div>🔔 Admin</div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page active">
+      <h1>Dashboard</h1>
+
+      <div class="cards">
+        <div class="stat blue">Active Users <b>1</b></div>
+        <div class="stat pink">Total Songs <b>6</b></div>
+        <div class="stat green">Trending <b>38</b></div>
+        <div class="stat orange">Plays <b>92k</b></div>
+      </div>
+
+      <div class="chart-box">
+        <h3>User Activity</h3>
+        <canvas id="chart"></canvas>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div id="users" class="page">
+
+      <h1>Users</h1>
+
+      <div class="tabs">
+        <button onclick="showUsers('login')">Login Users</button>
+        <button onclick="showUsers('signup')">Signup Users</button>
+        <button onclick="showUsers('guest')">Guest Users</button>
+        <button onclick="showUsers('blocked')">Blocked</button>
+      </div>
+
+      <div id="userList" class="user-list"></div>
+
+    </div>
+
+    <!-- TRENDING -->
+    <div id="trending" class="page">
+      <h1>Trending Songs</h1>
+
+      <div class="song">
+        🎵 Believer <span>Imagine Dragons</span>
+      </div>
+      <div class="song">
+        🎵 Faded <span>Alan Walker</span>
+      </div>
+      <div class="song">
+        🎵 Perfect <span>Ed Sheeran</span>
+      </div>
+      <div class="song">
+        🎵 Bones <span>Imagine Dragons</span>
+      </div>
+
+    </div>
+
+    <!-- EARNINGS -->
+    <div id="earnings" class="page">
+      <h1>Earnings</h1>
+
+      <div class="cards">
+        <div class="stat green">Total $10,750</div>
+        <div class="stat blue">+12% Growth</div>
+      </div>
+
+    </div>
+
+    <!-- ✅ ADMIN PLAYLIST PAGE -->
+<div id="adminPlaylists" class="page">
+  <h2 style="margin-top:30px;text-align:center;">Send Bulk Email</h2>
+
+<input id="emailSubject" placeholder="Email Subject">
+
+<textarea id="emailMessage" placeholder="Email Message"></textarea>
+
+<button onclick="sendBulkEmail()" class="sendBtn">Send Bulk Email</button>
+
+<script>
+async function sendBulkEmail() {
+  const subject = document.getElementById("emailSubject").value.trim();
+  const message = document.getElementById("emailMessage").value.trim();
+
+  if (!subject) {
+    alert("Please enter a subject");
+    return;
+  }
+
+  if (!message) {
+    alert("Please enter a message");
+    return;
+  }
+
+  try {
+    let res = await fetch("http://localhost:5000/api/admin/send-bulk-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subject, message }) // ⬅ ONLY subject + message
+    });
+
+    let data = await res.json();
+    alert(data.msg);
+
+  } catch (err) {
+    alert("Error sending request to server");
+    console.error(err);
+  }
+}
+</script>
+
+
+
+
+  <h2 style="text-align:center;">All Playlists (Admin)</h2>
+
+  <div id="adminPlaylistList"></div>
+
+</div>
+
+
+  </div>
+
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

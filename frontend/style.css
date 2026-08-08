@@ -1,0 +1,265 @@
+* {
+  box-sizing: border-box;
+}
+
+/* MAIN BACKGROUND */
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #2563eb, #020617);
+  color: #f1f5f9;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* BIG MUSIC SYMBOL BACKGROUND */
+body::before {
+  content: "♪  ♫  ♬  ♩  ♭  ♮";
+  position: fixed;
+  top: 15%;
+  left: -10%;
+  font-size: 130px;
+  color: rgba(255,255,255,0.07);
+  letter-spacing: 40px;
+  white-space: nowrap;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+/* ARTIST NAMES BACKGROUND */
+body::after {
+  content: "THE WEEKND   TAYLOR SWIFT   ARIJIT SINGH   DUA LIPA   DRAKE";
+  position: fixed;
+  bottom: 10%;
+  left: -8%;
+  font-size: 60px;
+  letter-spacing: 8px;
+  color: rgba(255,255,255,0.06);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ===== LOGIN / SIGNUP / ADMIN / CHOICE ===== */
+
+form,
+.login-box,
+.signup-box,
+.admin-box,
+.choice-box {
+  background: rgba(0,0,0,0.40);
+  backdrop-filter: blur(10px);
+  padding: 12px 30px;
+  width: fit-content;
+  margin: 12px auto;
+  border-radius: 20px;
+  box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Align login inputs + buttons vertically */
+.login-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Make login buttons smaller */
+.login-box button {
+  width: 200px;
+}
+
+
+/* TITLES */
+h1, h2 {
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* BRAND GRADIENT TEXT */
+h1 span, h2 span {
+  background: linear-gradient(90deg, #38bdf8, #22c55e);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* INPUTS */
+input {
+  width: 250px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  margin: 20px auto;
+  outline: none;
+  font-size: 15px;
+}
+
+input::placeholder { color: #94a3b8; }
+
+/* BUTTONS */
+button {
+  width: 100px;
+  padding: 13px;
+  border-radius: 18px;
+  margin-top: 12px;
+  background: linear-gradient(to right, #06b6d4, #3b82f6);
+  border: none;
+  color: #020617;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+button:hover { opacity: 0.9; }
+
+/* LINKS */
+a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===== DASHBOARD ===== */
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  background: rgba(2,6,23,0.95);
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+/* LOGO */
+.logo {
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+  color: #38bdf8;
+}
+
+/* SIDEBAR BUTTON */
+.sidebar button {
+  background: transparent;
+  color: #e5e7eb;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 6px 0;
+}
+
+.sidebar button:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.logout {
+  background: rgba(239,68,68,0.2) !important;
+  width: fit-content !important;
+  padding: 10px 22px;
+  font-size: 15px;
+  margin-left: auto;     /* Push right */
+  margin-right: 10px;
+  margin-top: 5px;
+  border-radius: 12px;
+}
+
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 24px;
+}
+
+/* TOP BAR */
+.topbar {
+  background: rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* SEARCH */
+.topbar input {
+  background: rgba(0,0,0,0.5);
+  border-radius: 14px;
+}
+
+/* PAGE SYSTEM */
+.page { display: none; }
+.page.active { display: block; }
+
+/* DASH CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.stat {
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* STRIP COLORS */
+.blue { border-left: 4px solid #38bdf8; }
+.pink { border-left: 4px solid #f472b6; }
+.green { border-left: 4px solid #22c55e; }
+.orange { border-left: 4px solid #f59e0b; }
+
+/* CHART */
+.chart-box {
+  margin-top: 22px;
+  background: rgba(255,255,255,0.04);
+  padding: 18px;
+  border-radius: 16px;
+}
+
+/* USERS */
+.user {
+  background: rgba(255,255,255,0.05);
+  padding: 12px 15px;
+  border-radius: 14px;
+}
+
+/* TRENDING */
+.song {
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 16px;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  .dashboard {flex-direction:column;}
+  .sidebar {width:100%;}
+  .cards {grid-template-columns:1fr;}
+}
+
+/* Prompt textarea bigger + centered */
+textarea {
+  width: 60%;             /* Bigger */
+  height: 150px;          /* Taller */
+  display: block;
+  margin: 20px auto;      /* Center */
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  outline: none;
+}
+
+
