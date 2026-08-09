@@ -250,8 +250,6 @@ cd Vibe-Beats
 
 ### 2️⃣ Install Node.js Dependencies
 
-From the project root:
-
 ```bash
 npm install
 ```
@@ -266,27 +264,26 @@ cd ..
 
 ### 4️⃣ Set Up Python Environment
 
-Create a Python virtual environment for the Celery worker:
-
 ```bash
 python -m venv api_worker/venv
 ```
 
-Activate it on Windows:
+Activate the virtual environment on Windows:
 
 ```powershell
 .\api_worker\venv\Scripts\Activate.ps1
 ```
 
-Install the required Python packages:
+Install the required Python dependencies:
 
 ```powershell
 pip install -r api_worker/requirements.txt
 ```
 ---
+
 ## ▶️ Running the Application
 
-VibeBeats uses multiple services. Run them in separate terminals and keep each service running while using the application.
+VibeBeats requires the following services to be running. Start each service in a separate terminal.
 
 ### 1️⃣ Start MongoDB
 
@@ -296,15 +293,17 @@ If MongoDB is installed as a Windows service:
 net start MongoDB
 ```
 
-Or start the MongoDB server according to your local installation.
+Make sure MongoDB is running before starting the backend.
 
 ### 2️⃣ Start Redis
+
+Open a separate terminal and run:
 
 ```powershell
 redis-server
 ```
 
-Redis should be available at:
+Redis runs on:
 
 ```text
 localhost:6379
@@ -312,14 +311,21 @@ localhost:6379
 
 ### 3️⃣ Start Celery Worker
 
-From the project root:
+Open another terminal in the VibeBeats project root.
+
+Activate the Python environment:
 
 ```powershell
 .\api_worker\venv\Scripts\Activate.ps1
+```
+
+Start the Celery worker:
+
+```powershell
 celery -A api_worker.celery_app worker --loglevel=info --pool=solo
 ```
 
-The worker should eventually display:
+A successful worker should display:
 
 ```text
 celery@... ready.
@@ -327,7 +333,7 @@ celery@... ready.
 
 ### 4️⃣ Start Node.js Backend
 
-Open another terminal:
+Open another terminal in the VibeBeats project root:
 
 ```powershell
 node backend/server.js
@@ -339,6 +345,14 @@ The backend runs on:
 http://localhost:5000
 ```
 
+A successful startup should show:
+
+```text
+Redis Connected
+MongoDB Connected
+Server running on http://localhost:5000
+```
+
 ### 5️⃣ Start React Frontend
 
 Open another terminal:
@@ -348,13 +362,13 @@ cd frontend
 npm run dev
 ```
 
-Vite will provide a local URL similar to:
+Vite will provide the frontend URL, usually:
 
 ```text
 http://localhost:5173
 ```
 
-Open that URL in your browser.
+Open the displayed URL in your browser.
 
 ---
 ## 🔌 Application Services
@@ -463,88 +477,53 @@ After starting all services, verify that:
 - Backend displays `MongoDB Connected`
 
 ---
-🔮 Future Enhancements
-The platform can be extended with:
-🤖 Advanced AI
-Multimodal emotion detection
-Voice-based mood detection
-Facial-expression analysis
-Personalized recommendation models
-User preference learning
-Reinforcement-learning-based recommendations
-🎵 Recommendation Engine
-Listening-history-based recommendations
-Collaborative filtering
-Content-based filtering
-Hybrid recommendation system
-Personalized playlists
-Daily mood playlists
-📊 Analytics Dashboard
-User engagement
-Most detected emotions
-Most popular moods
-Recommendation success rate
-Playlist engagement
-User retention
-System performance
-☁️ Production Deployment
-Potential deployment architecture:
-```text
-                    ┌───────────────┐
-                    │    Users      │
-                    └───────┬───────┘
-                            │
-                            ▼
-                    ┌───────────────┐
-                    │   Frontend    │
-                    │   Deployment  │
-                    └───────┬───────┘
-                            │
-                            ▼
-                    ┌───────────────┐
-                    │  Node Backend │
-                    └───────┬───────┘
-                            │
-              ┌─────────────┼─────────────┐
-              ▼             ▼             ▼
-          MongoDB         Redis       External APIs
-              │             │
-              │             ▼
-              │          Celery
-              │             │
-              │      ┌──────┴──────┐
-              │      ▼             ▼
-              │   AI Worker    Email Worker
-              │
-              └──────────┬──────────┘
-                         ▼
-                       Data
-```
-Possible production improvements include:
-Docker containerization
-CI/CD
-Cloud deployment
-Load balancing
-Monitoring
-Centralized logging
-Redis Cluster
-Horizontal worker scaling
-Rate limiting
-API security
-Automated testing
+## 🔮 Future Enhancements
+
+The current VibeBeats platform can be further extended with the following features.
+
+### 🤖 Advanced Emotion Detection
+
+- Voice-based mood detection
+- Facial-expression-based emotion detection
+- Multimodal emotion analysis combining text, voice, and facial expressions
+
+### 🎵 Advanced Recommendation Engine
+
+- Listening-history-based recommendations
+- Collaborative filtering
+- Content-based filtering
+- Hybrid recommendation system
+- More personalized playlist generation
+- User preference learning
+
+### 📊 Advanced Analytics
+
+- User engagement analytics
+- Most detected emotions
+- Most popular moods
+- Playlist engagement statistics
+- Recommendation performance analytics
+- User retention analytics
+
 ---
-📌 Development Workflow
+
+## 📌 Development Workflow
+
 The project follows a Git-based development workflow:
+
 ```bash
 git status
 git add .
 git commit -m "Describe your changes"
 git push
 ```
-Before committing, always verify that sensitive files are excluded:
+
+Before committing, verify that sensitive files such as `.env` are not included:
+
 ```bash
 git status
 ```
+
 ---
 📸 Screenshots
 🏠 Home Page
@@ -569,6 +548,3 @@ GitHub: @SindhuTingirkar
 📄 License
 This project is currently intended for educational, research, and portfolio purposes.
 ---
-💡 Project Vision
-> ***VibeBeats transforms emotions into music by combining AI-powered emotion understanding with intelligent music discovery and scalable backend architecture.***
-Feel it. Analyze it. Vibe with it.
