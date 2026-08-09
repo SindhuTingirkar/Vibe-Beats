@@ -1,6 +1,6 @@
 # 🎵 VibeBeats
 
-### AI-Powered Mood-Based Music Recommendation & Engagement Platform
+### AI-Powered Mood-Based Music Recommendation Platform
 
 ---
 
@@ -125,8 +125,11 @@ Emotion → Mood Mapping
 Music Recommendation
     ↓
 Personalized Vibe 🎧
+```
 ---
-🏗️ System Architecture
+
+## 🏗️ System Architecture
+
 ```text
                      ┌────────────────────┐
                      │      Frontend      │
@@ -145,7 +148,7 @@ Personalized Vibe 🎧
             ▼                                      ▼
    ┌─────────────────┐                    ┌─────────────────┐
    │    MongoDB      │                    │      Redis      │
-   │ Persistent Data │                    │ Cache + Broker  │
+   │ Persistent Data │                    │ Message Broker  │
    └─────────────────┘                    └────────┬────────┘
                                                    │
                                                    ▼
@@ -169,26 +172,29 @@ Personalized Vibe 🎧
                           │ Music Services │
                           └────────────────┘
 ```
+
 ---
-🧰 Technology Stack
-Layer	Technology
-Frontend	React.js
-Frontend Build Tool	Vite
-Backend	Node.js
-Backend Framework	Express.js
-Database	MongoDB
-ODM	Mongoose
-Cache	Redis
-Task Queue	Celery
-Message Broker	Redis
-AI / NLP	Hugging Face
-Music Platform	Spotify
-Email Processing	Python + Celery
-Authentication	JWT / Application Authentication
-API Communication	REST APIs
-Version Control	Git + GitHub
+## 🧰 Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React.js |
+| Frontend Build Tool | Vite |
+| Backend | Node.js |
+| Backend Framework | Express.js |
+| Database | MongoDB |
+| ODM | Mongoose |
+| Task Queue | Celery |
+| Message Broker | Redis |
+| AI / NLP | Hugging Face |
+| Music Platform | Spotify |
+| Email Processing | Python + Celery |
+| Authentication | JWT / Application Authentication |
+| API Communication | REST APIs |
+| Version Control | Git + GitHub |
+
 ---
-📁 Project Structure
+## 📁 Project Structure
 ```text
 VibeBeats
 │
