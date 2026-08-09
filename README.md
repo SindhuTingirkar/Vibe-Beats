@@ -525,26 +525,49 @@ git status
 ```
 
 ---
-📸 Screenshots
-🏠 Home Page
+
+## 📸 Screenshots
+
+### 🏠 Home Page
+
 ![VibeBeats Home](screenshots/home.png)
-🔐 Login
+
+### 🔐 Login
+
 ![VibeBeats Login](screenshots/login.png)
-📝 User Sign Up
+
+### 📝 User Sign Up
+
 ![VibeBeats Sign Up](screenshots/signup.png)
-🧠 Mood Analysis
+
+### 🧠 Mood Analysis
+
 ![VibeBeats Mood Analysis](screenshots/mood_analysis.png)
-🛡️ Admin Login
+
+### 🛡️ Admin Login
+
 ![VibeBeats Admin Login](screenshots/admin-login.png)
-🛠️ Admin Dashboard
+
+### 🛠️ Admin Dashboard
+
 ![VibeBeats Admin Dashboard](screenshots/admin_dashboard.png)
-📧 Bulk Email
+
+### 📧 Bulk Email
+
 ![VibeBeats Bulk Email](screenshots/bulk_email.png)
+
 ---
-👩‍💻 Author
-Sindhu Tingirkar
-GitHub: @SindhuTingirkar
+
+## 👩‍💻 Author
+
+### Sindhu Tingirkar
+
+GitHub: [@SindhuTingirkar](https://github.com/SindhuTingirkar)
+
 ---
-📄 License
+
+## 📄 License
+
 This project is currently intended for educational, research, and portfolio purposes.
+
 ---
