@@ -31,6 +31,7 @@ For example, a user can enter:
 
 ```text
 "I've had a really stressful day and just want something calm."
+```
 ---
 ## 🚀 Key Features
 
