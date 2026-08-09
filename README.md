@@ -532,7 +532,7 @@ git status
 
 ### 🛡️ Admin Login
 
-![VibeBeats Admin Login](screenshots/admin-login.png)
+![VibeBeats Admin Login](screenshots/admin_login.png)
 
 ### 🛠️ Admin Dashboard
 
