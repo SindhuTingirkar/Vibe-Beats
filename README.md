@@ -9,7 +9,7 @@ VibeBeats is a full-stack intelligent music recommendation platform that combine
 - **Artificial Intelligence**
 - **Natural Language Processing**
 - **Spotify Integration**
-- **Redis Caching**
+- **Redis Integration**
 - **Celery Distributed Task Processing**
 - **MongoDB**
 - **Bulk Email Automation**
@@ -189,7 +189,6 @@ Personalized Vibe 🎧
 | AI / NLP | Hugging Face |
 | Music Platform | Spotify |
 | Email Processing | Python + Celery |
-| Authentication | JWT / Application Authentication |
 | API Communication | REST APIs |
 | Version Control | Git + GitHub |
 
@@ -371,17 +370,6 @@ http://localhost:5173
 Open the displayed URL in your browser.
 
 ---
-## 🔌 Application Services
-
-| Service | Purpose | Default Address |
-|---|---|---|
-| React + Vite | User interface | `localhost:5173` |
-| Node.js + Express | REST API | `localhost:5000` |
-| MongoDB | Persistent database | `localhost:27017` |
-| Redis | Message broker | `localhost:6379` |
-| Celery | Background processing | Worker process |
-
----
 ## ⚡ Why Redis + Celery?
 
 VibeBeats uses **Redis and Celery** to handle background tasks without making the main Node.js application wait for long-running operations.
@@ -454,14 +442,12 @@ This prevents bulk email processing from blocking normal application requests.
 
 VibeBeats uses **MongoDB** for persistent application data.
 
-Typical data categories may include:
+The database stores application data such as:
 
-- Users
-- Authentication information
-- Music-related data
-- Playlists
-- Application activity
-- Recommendation-related information
+- User information
+- Authentication-related data
+- Music and playlist data
+- Other application data used by the platform
 
 **Mongoose** provides structured interaction between the Node.js backend and MongoDB.
 
