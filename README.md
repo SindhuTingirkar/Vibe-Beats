@@ -219,210 +219,249 @@ VibeBeats
 ```
 > The exact contents of individual directories may evolve as the project is extended.
 ---
-⚙️ Prerequisites
+## ⚙️ Prerequisites
+
 Before running VibeBeats, install:
-Node.js
-npm
-Python 3.x
-MongoDB
-Redis
-Git
+
+- Node.js
+- npm
+- Python 3.x
+- MongoDB
+- Redis
+- Git
+
 You will also need accounts/API credentials for services used by the application, such as:
-Hugging Face
-Spotify
-Email provider
+
+- Hugging Face
+- Spotify
+- Email provider
+
 ---
-📥 Installation
+## 📥 Installation
+
 Follow these steps to install and set up VibeBeats locally.
-1️⃣ Clone the Repository
+
+### 1️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/SindhuTingirkar/Vibe-Beats.git
 cd Vibe-Beats
 ```
-2️⃣ Install Node.js Dependencies
+
+### 2️⃣ Install Node.js Dependencies
+
 From the project root:
+
 ```bash
 npm install
 ```
-3️⃣ Install Frontend Dependencies
+
+### 3️⃣ Install Frontend Dependencies
+
 ```bash
 cd frontend
 npm install
 cd ..
 ```
-4️⃣ Set Up Python Environment
+
+### 4️⃣ Set Up Python Environment
+
 Create a Python virtual environment for the Celery worker:
+
 ```bash
 python -m venv api_worker/venv
 ```
+
 Activate it on Windows:
+
 ```powershell
 .\api_worker\venv\Scripts\Activate.ps1
 ```
+
 Install the required Python packages:
+
 ```powershell
 pip install -r api_worker/requirements.txt
 ```
 ---
-▶️ Running the Application
+## ▶️ Running the Application
+
 VibeBeats uses multiple services. Run them in separate terminals and keep each service running while using the application.
-1️⃣ Start MongoDB
+
+### 1️⃣ Start MongoDB
+
 If MongoDB is installed as a Windows service:
+
 ```powershell
 net start MongoDB
 ```
+
 Or start the MongoDB server according to your local installation.
-2️⃣ Start Redis
+
+### 2️⃣ Start Redis
+
 ```powershell
 redis-server
 ```
+
 Redis should be available at:
+
 ```text
 localhost:6379
 ```
-3️⃣ Start Celery Worker
+
+### 3️⃣ Start Celery Worker
+
 From the project root:
+
 ```powershell
 .\api_worker\venv\Scripts\Activate.ps1
 celery -A api_worker.celery_app worker --loglevel=info --pool=solo
 ```
+
 The worker should eventually display:
+
 ```text
 celery@... ready.
 ```
-4️⃣ Start Node.js Backend
+
+### 4️⃣ Start Node.js Backend
+
 Open another terminal:
+
 ```powershell
 node backend/server.js
 ```
+
 The backend runs on:
+
 ```text
 http://localhost:5000
 ```
-5️⃣ Start React Frontend
+
+### 5️⃣ Start React Frontend
+
 Open another terminal:
+
 ```powershell
 cd frontend
 npm run dev
 ```
+
 Vite will provide a local URL similar to:
+
 ```text
 http://localhost:5173
 ```
+
 Open that URL in your browser.
+
 ---
-🔌 Application Services
-Service	Purpose	Default Address
-React + Vite	User interface	`localhost:5173`
-Node.js + Express	REST API	`localhost:5000`
-MongoDB	Persistent database	`localhost:27017`
-Redis	Cache + message broker	`localhost:6379`
-Celery	Background processing	Worker process
+## 🔌 Application Services
+
+| Service | Purpose | Default Address |
+|---|---|---|
+| React + Vite | User interface | `localhost:5173` |
+| Node.js + Express | REST API | `localhost:5000` |
+| MongoDB | Persistent database | `localhost:27017` |
+| Redis | Message broker | `localhost:6379` |
+| Celery | Background processing | Worker process |
+
 ---
-🎯 Emotion Analysis
-The emotion analysis pipeline works conceptually as:
-```text
-Text Input
-↓
-Preprocessing
-↓
-Hugging Face Emotion Model
-↓
-Emotion Prediction
-↓
-Mood Mapping
-↓
-Music Recommendation
-```
-For example:
-```text
-"I feel extremely happy today!"
-↓
-Emotion
-↓
-Joy
-↓
-Happy
-↓
-Music Recommendation
-```
-The exact emotion-to-mood mapping depends on the application's configured logic.
----
-⚡ Why Redis + Celery?
-Without Background Processing
+## ⚡ Why Redis + Celery?
+
+VibeBeats uses **Redis and Celery** to handle background tasks without making the main Node.js application wait for long-running operations.
+
+### Without Background Processing
+
 ```text
 User Request
-↓
+     ↓
 Node.js
-↓
+     ↓
 AI Processing
-↓
+     ↓
 Email Processing
-↓
+     ↓
 Response
 ```
-The user may have to wait for expensive operations to finish.
-With Redis + Celery
+
+Long-running operations could make the request take longer to complete.
+
+### With Redis + Celery
+
 ```text
 User Request
-↓
+     ↓
 Node.js
-↓
+     ↓
 Queue Task
-↓
-Immediate Response / Continued Processing
-│
-▼
+     ↓
 Redis
-│
-▼
+     ↓
 Celery Worker
-│
-├── AI Processing
-└── Email Processing
+     ├── AI Processing
+     └── Email Processing
 ```
-This makes the architecture more suitable for applications that need to handle increasing workloads.
+
+This allows background tasks to be processed separately from the main Node.js application and helps keep the application responsive.
+
 ---
-📧 Bulk Email Architecture
-Bulk email operations are handled asynchronously.
+
+## 📧 Bulk Email Architecture
+
+Bulk email operations are handled asynchronously using **Redis and Celery**.
+
 ```text
 Admin / Application
-│
-▼
-Email Request
-│
-▼
-Redis
-│
-▼
-Celery Email Worker
-│
-▼
-Email Provider
-│
-▼
-Recipient
+        │
+        ▼
+  Email Request
+        │
+        ▼
+      Redis
+        │
+        ▼
+ Celery Email Worker
+        │
+        ▼
+ Email Provider
+        │
+        ▼
+   Recipient
 ```
-This prevents bulk email operations from blocking normal API requests.
+
+The email request is placed into the task queue, and the Celery worker processes the email task in the background.
+
+This prevents bulk email processing from blocking normal application requests.
+
 ---
-🗄️ Database
-MongoDB is used for persistent application data.
+## 🗄️ Database
+
+VibeBeats uses **MongoDB** for persistent application data.
+
 Typical data categories may include:
-Users
-Authentication information
-Music-related data
-Playlists
-Application activity
-Recommendation-related information
-Mongoose provides structured interaction between Node.js and MongoDB.
+
+- Users
+- Authentication information
+- Music-related data
+- Playlists
+- Application activity
+- Recommendation-related information
+
+**Mongoose** provides structured interaction between the Node.js backend and MongoDB.
+
 ---
-🧪 Testing the Application
-After starting all services, verify:
-Frontend loads at `http://localhost:5173`
-Backend runs at `http://localhost:5000`
-Redis accepts connections
-Celery worker displays `ready`
-Backend displays `MongoDB Connected`
+## 🧪 Testing the Application
+
+After starting all services, verify that:
+
+- Frontend loads at `http://localhost:5173`
+- Backend runs at `http://localhost:5000`
+- Redis accepts connections
+- Celery worker displays `ready`
+- Backend displays `MongoDB Connected`
+
 ---
 🔮 Future Enhancements
 The platform can be extended with:
